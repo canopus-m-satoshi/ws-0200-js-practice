@@ -1,4 +1,3 @@
-
 /**
  *  クラスの定義
  *
@@ -22,19 +21,47 @@
  */
 
 class Person {
+  constructor(name = '', age = 0, bio = '') {
+    this.name = name
+    this.age = age
+    this.bio = bio
+  }
+  // インスタンスメソッド：インスタンスを作成した後にそのインスタンスからアクセスできる
+  // インスタンスのプロパティ（状態）にアクセスしたり、それを変更したりすることができる
+  sayHi() {
+    console.log('Hi!!')
+  }
+  // クラスメソッド：静的メソッドでインスタンスを作成せずに直接クラスから呼び出せる
+  static describe() {
+    console.log('This is a Person class')
+  }
+  toString() {
+    return `name: ${this.name}, age: ${this.age}, bio: ${this.bio}`
+  }
+  get isUnderage() {
+    if (this.age >= 20) {
+      return false
+    } else {
+      return true
+    }
+  }
 }
 
-function main () {
+function main() {
   const person = new Person('ichiro', 54, 'I like to play baseball')
+  console.log('インスタンス化後：', person)
   person.sayHi()
   Person.describe()
   person.isUnderage
 
   person.bio = 'I like to play basketball'
+  console.log('プロパティ定義後：', person)
   return person.toString()
 }
 
+main()
+
 module.exports = {
   Person,
-  main
+  main,
 }
