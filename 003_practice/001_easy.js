@@ -1,4 +1,3 @@
-
 /**
  *  文字列の長さ
  *
@@ -12,7 +11,11 @@
  */
 
 function length(str) {
+  const splitWords = str.split('/')
+  return splitWords
 }
+
+length('文字列を反転させる関数を実装してください')
 
 /**
  *  文字列の反転
@@ -26,6 +29,10 @@ function length(str) {
  *
  */
 function reverse(str) {
+  return str
+    .split('')
+    .reverse()
+    .join('')
 }
 
 /**
@@ -41,6 +48,12 @@ function reverse(str) {
  */
 
 function findIndex(str, char) {
+  // const strToArry = str.split('')
+  // for (let i = 0; i < strToArry.length; i++) {
+  //   if (char === strToArry[i]) return i
+  // }
+
+  return str.indexOf(char)
 }
 
 /**
@@ -56,6 +69,7 @@ function findIndex(str, char) {
  */
 
 function split(a, b) {
+  return a.split(b)
 }
 
 /**
@@ -71,6 +85,9 @@ function split(a, b) {
  */
 
 function sum(array) {
+  return array.reduce((prevVal, curVal) => {
+    return prevVal + curVal
+  }, 0)
 }
 
 /**
@@ -88,6 +105,10 @@ function sum(array) {
  */
 
 function average(array) {
+  if (array.length === 0) return 0
+
+  const average = array.reduce((a, b) => a + b) / array.length
+  return Math.floor(average)
 }
 
 /**
@@ -103,6 +124,7 @@ function average(array) {
  */
 
 function concat(a, b) {
+  return a.concat(b)
 }
 
 /**
@@ -118,6 +140,7 @@ function concat(a, b) {
  */
 
 function size(array) {
+  return array.length
 }
 
 /**
@@ -134,6 +157,25 @@ function size(array) {
  */
 
 function minMax(array) {
+  if (array.length === 0) return
+
+  // 下記のやり方では予期せぬエラーを起こす可能性あり？
+  // https://qiita.com/ndj/items/82e9c5a4518fe16e539f
+  // let min = Math.min(...array)
+  // let max = Math.max(...array)
+
+  // reduce関数を使用
+  const arrayMax = function(a, b) {
+    return Math.max(a, b)
+  }
+  const arrayMin = function(a, b) {
+    return Math.min(a, b)
+  }
+
+  let max = array.reduce(arrayMax)
+  let min = array.reduce(arrayMin)
+
+  return `max: ${max}, min: ${min}`
 }
 
 /**
@@ -147,8 +189,7 @@ function minMax(array) {
  *
  */
 
-function seq(num) {
-}
+function seq(num) {}
 
 /**
  *  奇数の連番
@@ -162,8 +203,7 @@ function seq(num) {
  *
  */
 
-function omitSeq(num) {
-}
+function omitSeq(num) {}
 
 /**
  *  指定された数値以下の配列
@@ -177,10 +217,7 @@ function omitSeq(num) {
  *
  */
 
-function filter(array, num) {
-}
-
-
+function filter(array, num) {}
 
 /**
  *  Fizz Buzz
@@ -205,8 +242,7 @@ function filter(array, num) {
  *    ...
  */
 
-function fizzBuzz () {
-}
+function fizzBuzz() {}
 
 module.exports = {
   length,
@@ -222,5 +258,5 @@ module.exports = {
   seq,
   filter,
   omitSeq,
-  fizzBuzz
+  fizzBuzz,
 }
