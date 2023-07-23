@@ -11,8 +11,8 @@
  */
 
 function length(str) {
-  const splitWords = str.split('/')
-  return splitWords
+  if (str === '') return 0
+  return 1 + length(str.slice(1)) // slice： 第二引数(endの範囲指定)をしないと列の最後 (arr.length) までを取り出す
 }
 
 length('文字列を反転させる関数を実装してください')
@@ -189,7 +189,13 @@ function minMax(array) {
  *
  */
 
-function seq(num) {}
+function seq(num) {
+  const array = []
+  for (let i = 0; i < num; i++) {
+    array.push(i)
+  }
+  return array
+}
 
 /**
  *  奇数の連番
@@ -203,7 +209,22 @@ function seq(num) {}
  *
  */
 
-function omitSeq(num) {}
+function omitSeq(num) {
+  const array = []
+  // for (let i = 0; i <= num; i++) {
+  //   if (i % 2 === 1) {
+  //     array.push(i)
+  //   }
+  // }
+
+  for (let i = 1; i <= num; i += 2) {
+    array.push(i)
+  }
+
+  return array
+}
+
+omitSeq(7)
 
 /**
  *  指定された数値以下の配列
@@ -217,7 +238,10 @@ function omitSeq(num) {}
  *
  */
 
-function filter(array, num) {}
+function filter(array, num) {
+  const result = array.filter((el) => el <= num)
+  return result
+}
 
 /**
  *  Fizz Buzz
@@ -242,7 +266,19 @@ function filter(array, num) {}
  *    ...
  */
 
-function fizzBuzz() {}
+function fizzBuzz() {
+  for (let i = 1; i <= 100; i++) {
+    if (i % 3 === 0 && i % 5 === 0) {
+      console.log(`${i} FizzBuzz`)
+    } else if (i % 3 === 0) {
+      console.log(`${i} Fizz`)
+    } else if (i % 5 === 0) {
+      console.log(`${i} Buzz`)
+    } else {
+      console.log(i)
+    }
+  }
+}
 
 module.exports = {
   length,
