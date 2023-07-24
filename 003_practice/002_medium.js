@@ -10,6 +10,10 @@
  *
  */
 function rotate(str, num) {
+  const strLen = str.length
+
+  num = ((num % strLen) + strLen) % strLen
+  return str.slice(-num) + str.slice(0, -num)
 }
 
 /**
@@ -24,6 +28,9 @@ function rotate(str, num) {
  *
  */
 function removeVowels(str) {
+  // gフラグ=全ての一致を検索
+  // iフラグ=大文字と小文字を区別しない
+  return str.replace(/[aeiou]/gi, '')
 }
 
 /**
@@ -38,6 +45,14 @@ function removeVowels(str) {
  *
  */
 function countStr(s1, s2) {
+  let count = 0
+  for (let i = 0; i <= s1.length - s2.length; i++) {
+    if (s1.slice(i, i + s2.length) === s2) {
+      count++
+    }
+  }
+
+  return count
 }
 
 /**
@@ -46,13 +61,24 @@ function countStr(s1, s2) {
  *
  *  example:
  *      work => false
- *      anna => true
+ *      c => true
  *      madam => true
  *      level => true
  *
  */
 
 function isPalindrome(str) {
+  let strLength = str.length
+
+  // 文字列(str)の半分までループ
+  for (let i = 0; i < strLength / 2; i++) {
+    //　頭からi番目の文字(str[i])と後ろからi番目の文字(str[strLength - 1 - i])を比較
+    if (str[i] !== str[strLength - 1 - i]) {
+      return false
+    }
+  }
+
+  return true
 }
 
 /**
@@ -69,7 +95,23 @@ function isPalindrome(str) {
  *    11 => True
  *
  */
+
+/* 
+~ MEMO ~
+ある数が素数でない（つまり合成数である）場合、その数の因数（その数を割り切る数）は必ずその数の平方根以下に存在します。なぜなら、もし平方根より大きい因数が存在するとしたら、その対（その数をその因数で割った結果得られる数）は必ず平方根以下になるからです。
+
+例えば、36を考えてみましょう。36の平方根は6です。36の因数は1, 2, 3, 4, 6, 9, 12, 18, 36ですが、これらの因数の中で平方根（6）より大きいものは9, 12, 18, 36です。しかし、これらの因数で36を割ると、それぞれ4, 3, 2, 1となり、これらは全て平方根以下になります。
+
+したがって、ある数が素数であるかどうかを判定するためには、その数の平方根までの数で割り切れるかどうかを確認すれば十分です。これにより、必要な計算量を大幅に削減することができます。
+*/
+
 function isPrime(num) {
+  if (num === 1) return false
+
+  for (let i = 2; i * i <= num; i++) {
+    if (num % i === 0) return false
+  }
+  return true
 }
 
 /**
@@ -88,6 +130,22 @@ function isPrime(num) {
  *
  */
 function sumWithout4andNext(array) {
+  let skipNext4 = false
+
+  return array.reduce((sum, currentValue) => {
+    if (skipNext4) {
+      if (currentValue !== 4) {
+        skipNext4 = false
+      }
+      return sum
+    }
+    if (currentValue === 4) {
+      skipNext4 = true
+      return sum
+    }
+
+    return sum + currentValue
+  }, 0)
 }
 
 module.exports = {
@@ -96,5 +154,5 @@ module.exports = {
   countStr,
   isPalindrome,
   isPrime,
-  sumWithout4andNext
+  sumWithout4andNext,
 }
