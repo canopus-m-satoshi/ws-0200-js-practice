@@ -175,7 +175,7 @@ function minMax(array) {
   let max = array.reduce(arrayMax)
   let min = array.reduce(arrayMin)
 
-  return `max: ${max}, min: ${min}`
+  return console.log(`max: ${max}, min: ${min}`)
 }
 
 /**
