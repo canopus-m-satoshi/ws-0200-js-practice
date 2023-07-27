@@ -48,12 +48,11 @@ function getDays() {
  */
 
 function findNum(array, num) {
-  const indexOfArray = array.indexOf(num)
-  if (indexOfArray !== -1) {
-    return true
-  } else {
-    return false
+  // for文で書き換え 簡潔に書ける
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === num) return true
   }
+  return false
 }
 
 /**
@@ -67,13 +66,43 @@ function findNum(array, num) {
  */
 
 function isDuplicate(array) {
-  let setLength = new Set(array).size // 最適解なのか？
-  if (array.length !== setLength) {
-    return true
-  } else {
-    return false
+  // obj {} にarray内のデータを格納し、keyにarray[i]、値に「true」を格納していく
+
+  const obj = {}
+
+  for (let i = 0; i < array.length; i++) {
+    const value = array[i]
+
+    // obj[value]がtrue＝重複しているということなので、trueを返却
+    if (obj[value]) return true
+
+    // for文でのループ時に、objのkeyにarray[i]、値にtrueを格納していく
+    // この時格納されるtrueを↑のif文での重複チェックに利用する
+    obj[value] = true
   }
+
+  // for文内で、trueがreturnされない場合は重複はないのでfalseを返却する
+  return false
 }
+
+// function isDuplicate(array) {
+//   let setLength = new Set(array).size // 最適解なのか？
+//   if (array.length !== setLength) {
+//     return true
+//   } else {
+//     return false
+//   }
+// }
+
+// →Set関数を利用している
+// 一度解いたものは説明できるようにしっかりと理解していく
+
+// for文でも解けるので調整してみる
+// for文の場合の方が応用が効くので調整してみる
+
+// 基本的に再代入する場合にのみletを使用する
+// 基本的にはconstを使用する
+// 使わなくていいのならletは使用せず、constを使用する
 
 module.exports = {
   printArray,

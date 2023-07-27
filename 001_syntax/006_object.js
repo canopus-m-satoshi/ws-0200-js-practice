@@ -92,18 +92,23 @@ assignNumber(persons)
  *
  */
 
+// 同じ解き方でできる: 5.4 配列に重複した要素があれば、true、そうでなければfalseを返す関数を実装してください
 function isDuplicate(array) {
-  let obj = {}
+  const obj = {}
 
   for (let i = 0; i < array.length; i++) {
-    if (obj[array[i]]) {
-      return true
-    }
-    obj[array[i]] = true
+    const value = array[i]
+
+    if (obj[value]) return true
+
+    obj[value] = array[i]
   }
 
   return false
 }
+
+// 配列（Array）：順序を持った複数の値を格納するデータ構造
+// オブジェクト（Object）：キーと値のペア(keyとvalueのペアをpropertyという)を格納するデータ構造
 
 let arrayA = [1, 2, 2, 3]
 let arrayB = [1, 2, 3, 2]

@@ -13,10 +13,13 @@ function length(str) {
  */
 
 function lengthIsEven(str) {
-  if (str.length % 2 === 0) {
-    return true
-  }
-  return false
+  // if (str.length % 2 === 0) {
+  //   return true
+  // }
+  // return false
+
+  // →if文で書く必要なし
+  return str.length % 2 === 0 // 返却値はtrue/falseのため、if文で記述しなくても大丈夫。より簡潔に書ける
 }
 
 /**
@@ -25,7 +28,11 @@ function lengthIsEven(str) {
  */
 
 function firstChar(str) {
-  return str.charAt(0)
+  // →文字列は配列のように扱えるので、
+  // 添字のようにして確認することができる
+  // return str.charAt(0)
+
+  return str[0]
 }
 
 /**
@@ -34,7 +41,7 @@ function firstChar(str) {
  */
 
 function lastChar(str) {
-  return str.charAt(str.length - 1)
+  return str[str.length - 1]
 }
 
 /**
@@ -59,12 +66,19 @@ function substring(str, a, b) {
  * */
 
 function isInclude(a, b) {
-  if (a.includes(b)) {
-    return true
-  } else {
-    return false
-  }
+  // if (a.includes(b)) {
+  //   return true
+  // } else {
+  //   return false
+  // }
+
+  // includesはtrue または falseを返すため、if文で書く必要がない
+  //  より簡潔に記述できる
+  return a.includes(b)
 }
+
+// →if文で書く必要なし
+// より簡潔に記述できる
 
 /**
  *  4.7 引数で渡された文字列を一文字ずつ表示するメソッドを実装してください
@@ -83,7 +97,7 @@ function isInclude(a, b) {
 
 function printByChar(str) {
   for (let i = 0; i < str.length; i++) {
-    let char = str[i]
+    const char = str[i]
     console.log(char)
   }
 }

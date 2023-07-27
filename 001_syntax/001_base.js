@@ -81,11 +81,13 @@ function remainderTwoArgs(a) {
  *
  */
 function isEven(a) {
-  if (a % 2 === 0) {
-    return true
-  } else {
-    return false
-  }
+  // if (a % 2 === 0) {
+  //   return true
+  // } else {
+  //   return false
+  // }
+
+  return a % 2 === 0 // 返却値はtrue/falseのため、if文で記述しなくても大丈夫。より簡潔に書ける
 }
 
 /**
