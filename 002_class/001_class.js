@@ -32,6 +32,9 @@ class Person {
     console.log('Hi!!')
   }
   // クラスメソッド：静的メソッドでインスタンスを作成せずに直接クラスから呼び出せる
+  // 使用時＝インスタンスの状態に依存しない操作を行いたい時または全てのインスタンスに共通の機能を提供する場合
+  // ファクトリーメソッド：新しいPersonインスタンスを作成する代替手段として、特定のセットアップまたは初期化手順をカプセル化する
+  // ユーティリティメソッド：Personクラスに関連するが、特定のPersonインスタンスには依存しない機能
   static describe() {
     console.log('This is a Person class')
   }
@@ -39,11 +42,14 @@ class Person {
     return `name: ${this.name}, age: ${this.age}, bio: ${this.bio}`
   }
   get isUnderage() {
-    if (this.age >= 20) {
-      return false
-    } else {
-      return true
-    }
+    // 比較演算子の返却値はtrue or falseなので、if文で記述しなくてもいい
+    return this.age < 20
+
+    // if (this.age >= 20) {
+    //   return false
+    // } else {
+    //   return true
+    // }
   }
 }
 

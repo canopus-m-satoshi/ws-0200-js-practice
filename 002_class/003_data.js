@@ -89,9 +89,7 @@ class List {
   find(target) {
     // TODO:
     for (let i = 0; i < this.data.length; i++) {
-      if (this.data[i] === target) {
-        return this.data[i]
-      }
+      if (this.data[i] === target) return this.data[i]
     }
     return undefined
   }
@@ -106,9 +104,7 @@ class List {
   findIndex(target) {
     // TODO:
     for (let i = 0; i < this.data.length; i++) {
-      if (this.data[i] === target) {
-        return i
-      }
+      if (this.data[i] === target) return i
     }
     return -1
   }
@@ -124,6 +120,7 @@ class List {
    */
   filter(target) {
     // TODO:
+
     const newArray = []
 
     for (let i = 0; i < this.data.length; i++) {
@@ -131,8 +128,68 @@ class List {
         newArray.push(this.data[i])
       }
     }
+
     return new List(newArray)
     // return newArray
+
+    /** 配列を返すと、Listクラスのメソッド（sizeメソッドやfilterメソッドなど）を利用することができなくなる
+     * ↓
+     * filterメソッドの返り値を配列にしてしまうと、filterメソッド実行後にクラス内のメソッドが利用できなくなってしまうので、新しいクラスを生成して返却する
+     *
+     *
+     *
+     */
+
+    /** 
+     * ↓ インスタンスを生成して返却するパターンと配列を返却するパターンの挙動確認用
+class List {
+  data = []
+
+  constructor(array) {
+    this.data = array
+  }
+
+  get size() {
+    return this.data.length
+  }
+
+// インスタンスを生成して返すパターン
+
+  filterClass(target) {
+    const newArray = []
+
+    for (let i = 0; i < this.data.length; i++) {
+      if (this.data[i] !== target) {
+        newArray.push(this.data[i])
+      }
+    }
+
+    return new List(newArray)
+  }
+
+// 配列を返すパターン
+  filterArray(target) {
+    const newArray = []
+
+    for (let i = 0; i < this.data.length; i++) {
+      if (this.data[i] !== target) {
+        newArray.push(this.data[i])
+      }
+    }
+
+    return newArray
+  }
+}
+
+const obj = new List([1, 2, 3, 4, 5])
+
+const listClass = obj.filterClass(1)
+const listArray = obj.filterArray(1)
+
+
+listClass.size // 4 インスタンスが生成され返却されているのでListクラスのインスタンスが利用できる
+listArray.size // undefined  配列内に、sizeというメソッドはないためundefinedとなる
+   */
   }
 }
 
@@ -189,6 +246,7 @@ class Stack {
     //   }
     // }
     if (this.size > 0) {
+      // this.size = getter size()でdataのlengthを呼び出している
       return this.data[this.size - 1]
     }
   }
