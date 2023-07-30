@@ -46,14 +46,32 @@ function removeVowels(str) {
  */
 function countStr(s1, s2) {
   let count = 0
-  for (let i = 0; i <= s1.length - s2.length; i++) {
-    if (s1.slice(i, i + s2.length) === s2) {
-      count++
-    }
+  let index = s1.indexOf(s2) // `s1` 内で `s2` の最初のインデックスを取得
+  /* indexOf() メソッドは、呼び出す String オブジェクト中で、 fromIndex から検索を始め、指定された値が最初に現れたインデックスを返します。値が見つからない場合は -1 を返します。
+
+  * str.indexOf(searchValue [, fromIndex])
+  * searchValue=検索する値を表す文字列
+  * fromIndex =(省略可)整数値で、検索を始める位置を表します。既定値は 0
+*/
+
+  while (index !== -1) {
+    count++ // カウントを増やす
+    index = s1.indexOf(s2, index + 1) // 次のインデックスを探す
   }
 
   return count
 }
+
+// function countStr(s1, s2) {
+//   let count = 0
+//   for (let i = 0; i <= s1.length - s2.length; i++) {
+//     if (s1.slice(i, i + s2.length) === s2) {
+//       count++
+//     }
+//   }
+
+//   return count
+// }
 
 /**
  *  引数に与えられたアルファベットの文字列が回文であること
@@ -68,14 +86,10 @@ function countStr(s1, s2) {
  */
 
 function isPalindrome(str) {
-  let strLength = str.length
-
   // 文字列(str)の半分までループ
-  for (let i = 0; i < strLength / 2; i++) {
-    //　頭からi番目の文字(str[i])と後ろからi番目の文字(str[strLength - 1 - i])を比較
-    if (str[i] !== str[strLength - 1 - i]) {
-      return false
-    }
+  for (let i = 0; i < str.length / 2; i++) {
+    //　頭からi番目の文字(str[i])と後ろからi番目の文字(str[str.length - 1 - i])を比較
+    if (str[i] !== str[str.length - 1 - i]) return false
   }
 
   return true
@@ -129,24 +143,50 @@ function isPrime(num) {
  *    [4] => 0
  *
  */
+
 function sumWithout4andNext(array) {
-  let skipNext4 = false
+  let sum = 0
+  let skipNext = false
 
-  return array.reduce((sum, currentValue) => {
-    if (skipNext4) {
-      if (currentValue !== 4) {
-        skipNext4 = false
-      }
-      return sum
-    }
-    if (currentValue === 4) {
-      skipNext4 = true
-      return sum
+  for (let i = 0; i < array.length; i++) {
+    // 配列内の値4の場合の処理
+    if (array[i] === 4) {
+      skipNext = true
+      continue
     }
 
-    return sum + currentValue
-  }, 0)
+    // 配列内の値4の次の値の場合の処理
+    if (skipNext) {
+      skipNext = false
+      // continue＝ループの実行中に現在の処理をスキップする
+      continue
+    }
+
+    // それ以外の場合の処理
+    sum += array[i]
+  }
+
+  return sum
 }
+
+// function sumWithout4andNext(array) {
+//   let skipNext4 = false
+
+//   return array.reduce((sum, currentValue) => {
+//     if (skipNext4) {
+//       if (currentValue !== 4) {
+//         skipNext4 = false
+//       }
+//       return sum
+//     }
+//     if (currentValue === 4) {
+//       skipNext4 = true
+//       return sum
+//     }
+
+//     return sum + currentValue
+//   }, 0)
+// }
 
 module.exports = {
   rotate,

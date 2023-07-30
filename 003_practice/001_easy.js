@@ -29,10 +29,13 @@ length('文字列を反転させる関数を実装してください')
  *
  */
 function reverse(str) {
-  return str
-    .split('')
-    .reverse()
-    .join('')
+  let reverseStr = ''
+
+  for (let i = str.length - 1; i >= 0; i--) {
+    reverseStr += str[i]
+  }
+
+  return reverseStr
 }
 
 /**
@@ -48,12 +51,11 @@ function reverse(str) {
  */
 
 function findIndex(str, char) {
-  // const strToArry = str.split('')
-  // for (let i = 0; i < strToArry.length; i++) {
-  //   if (char === strToArry[i]) return i
-  // }
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === char) return i
+  }
 
-  return str.indexOf(char)
+  return -1
 }
 
 /**
@@ -85,9 +87,17 @@ function split(a, b) {
  */
 
 function sum(array) {
-  return array.reduce((prevVal, curVal) => {
-    return prevVal + curVal
-  }, 0)
+  let sum = 0
+
+  for (let i = 0; i < array.length; i++) {
+    sum += array[i]
+  }
+  return sum
+
+  // reduceでの実装
+  // return array.reduce((prevVal, curVal) => {
+  //   return prevVal + curVal
+  // }, 0)
 }
 
 /**
@@ -107,8 +117,17 @@ function sum(array) {
 function average(array) {
   if (array.length === 0) return 0
 
-  const average = array.reduce((a, b) => a + b) / array.length
-  return Math.floor(average)
+  let sum = 0
+
+  for (let i = 0; i < array.length; i++) {
+    sum += array[i]
+  }
+
+  return Math.floor(sum / array.length)
+
+  // reduceでの実装
+  //   const average = array.reduce((a, b) => a + b) / array.length
+  //   return Math.floor(average)
 }
 
 /**
@@ -124,8 +143,19 @@ function average(array) {
  */
 
 function concat(a, b) {
-  return a.concat(b)
+  if (a.length === 0 || b.length === 0) return []
+
+  for (let i = 0; i < b.length; i++) {
+    a.push(b[i])
+  }
+
+  return a
+
+  // concatでの実装
+  // return a.concat(b)
 }
+
+concat([1, 3, 7, 9], [3, 4])
 
 /**
  *  2.1.2 配列の個数
@@ -159,24 +189,45 @@ function size(array) {
 function minMax(array) {
   if (array.length === 0) return
 
-  // 下記のやり方では予期せぬエラーを起こす可能性あり？
-  // https://qiita.com/ndj/items/82e9c5a4518fe16e539f
-  // let min = Math.min(...array)
-  // let max = Math.max(...array)
+  let maxNum = array[0]
+  let minNum = array[0]
 
-  // reduce関数を使用
-  const arrayMax = function(a, b) {
-    return Math.max(a, b)
-  }
-  const arrayMin = function(a, b) {
-    return Math.min(a, b)
+  for (let i = 0; i < array.length; i++) {
+    if (maxNum < array[i]) {
+      maxNum = array[i]
+    }
   }
 
-  let max = array.reduce(arrayMax)
-  let min = array.reduce(arrayMin)
+  for (let i = 0; i < array.length; i++) {
+    if (minNum > array[i]) {
+      minNum = array[i]
+    }
+  }
 
-  return console.log(`max: ${max}, min: ${min}`)
+  return console.log(`max: ${maxNum}, min: ${minNum}`)
 }
+
+// function minMax(array) {
+//   if (array.length === 0) return
+
+//   // 下記のやり方では予期せぬエラーを起こす可能性あり？
+//   // https://qiita.com/ndj/items/82e9c5a4518fe16e539f
+//   // let min = Math.min(...array)
+//   // let max = Math.max(...array)
+
+//   // reduce関数を使用
+//   const arrayMax = function(a, b) {
+//     return Math.max(a, b)
+//   }
+//   const arrayMin = function(a, b) {
+//     return Math.min(a, b)
+//   }
+
+//   let max = array.reduce(arrayMax)
+//   let min = array.reduce(arrayMin)
+
+//   return console.log(`max: ${max}, min: ${min}`)
+// }
 
 /**
  *  連番
@@ -211,11 +262,6 @@ function seq(num) {
 
 function omitSeq(num) {
   const array = []
-  // for (let i = 0; i <= num; i++) {
-  //   if (i % 2 === 1) {
-  //     array.push(i)
-  //   }
-  // }
 
   for (let i = 1; i <= num; i += 2) {
     array.push(i)
@@ -239,9 +285,16 @@ omitSeq(7)
  */
 
 function filter(array, num) {
-  const result = array.filter((el) => el <= num)
-  return result
+  const newArray = []
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] <= num) {
+      newArray.push(array[i])
+    }
+  }
+
+  return newArray
 }
+filter([1, 7, 5, 4], 7)
 
 /**
  *  Fizz Buzz
