@@ -16,10 +16,6 @@ function sumSequence(n, sum = 0) {
   return sum
 }
 
-console.log(sumSequence(3))
-console.log(sumSequence(10))
-console.log(sumSequence(30))
-
 /**
  *  フィボナッチ数
  *
@@ -35,8 +31,6 @@ console.log(sumSequence(30))
 //  https://qiita.com/ryo2132/items/4bedeec846d0427f1ac7#%E3%82%B3%E3%83%BC%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%82%92%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B:~:text=%E3%81%A8%E6%80%9D%E3%81%84%E3%81%BE%E3%81%99%E3%80%82-,%E3%82%B3%E3%83%BC%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%82%92%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B,-%E6%AC%A1%E3%81%AB%E5%AE%9F%E9%9A%9B%E3%81%AB
 
 function fibonacci(num) {
-  debugger
-
   // /* num = 2以下になるまでfibonacci(num -1)を呼び出す
   //  * 呼び出した分Call Stackにfibonacci()が溜まっていく
   //  * 引数が10の場合は、
@@ -66,8 +60,6 @@ function fibonacci(num) {
   // Call Stackには再帰関数 fibonacci(num - 1)の値も保持されており、保持されているnumの値は3→4〜8の順である
   // スタックなので、numの値が3→4〜8の順で「array.push(array[num - 2] + array[num - 3])」のnumの値に代入されていく？
 }
-
-fibonacci(8)
 
 /**
  *  2.4.2 ディレクトリに含まれるファイルサイズの合計
@@ -122,7 +114,6 @@ fibonacci(8)
  */
 
 function fileSize(node, sum = 0) {
-  debugger
   if (node.type === 'file') return sum + node.size
 
   if (node.type === 'folder') {
