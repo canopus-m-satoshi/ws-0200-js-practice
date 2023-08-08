@@ -10,11 +10,14 @@
  *
  */
 function rotate(str, num) {
+  debugger
   const strLen = str.length
 
   num = ((num % strLen) + strLen) % strLen
   return str.slice(-num) + str.slice(0, -num)
 }
+
+rotate('library', 1)
 
 /**
  *  母音を除いた文字列
@@ -45,9 +48,12 @@ function removeVowels(str) {
  *
  */
 function countStr(s1, s2) {
+  debugger
   let count = 0
   let index = s1.indexOf(s2) // `s1` 内で `s2` の最初のインデックスを取得
-  /* indexOf() メソッドは、呼び出す String オブジェクト中で、 fromIndex から検索を始め、指定された値が最初に現れたインデックスを返します。値が見つからない場合は -1 を返します。
+  /* 構文
+  * str.indexOf(searchValue [, fromIndex])
+  * indexOf() メソッドは、呼び出す String オブジェクト中で、 fromIndex(整数値で、検索を始める位置) から検索を始め、指定された値が最初に現れたインデックスを返します。値が見つからない場合は -1 を返します。
 
   * str.indexOf(searchValue [, fromIndex])
   * searchValue=検索する値を表す文字列
@@ -61,6 +67,8 @@ function countStr(s1, s2) {
 
   return count
 }
+
+countStr('abcdabeabc', 'abc')
 
 // function countStr(s1, s2) {
 //   let count = 0
@@ -152,13 +160,13 @@ function sumWithout4andNext(array) {
     // 配列内の値4の場合の処理
     if (array[i] === 4) {
       skipNext = true
+      // continue -> 繰り返しを中断してループの先頭に戻る命令
       continue
     }
 
     // 配列内の値4の次の値の場合の処理
     if (skipNext) {
       skipNext = false
-      // continue＝ループの実行中に現在の処理をスキップする
       continue
     }
 

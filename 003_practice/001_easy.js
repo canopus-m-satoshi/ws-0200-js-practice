@@ -196,9 +196,7 @@ function minMax(array) {
     if (maxNum < array[i]) {
       maxNum = array[i]
     }
-  }
 
-  for (let i = 0; i < array.length; i++) {
     if (minNum > array[i]) {
       minNum = array[i]
     }
