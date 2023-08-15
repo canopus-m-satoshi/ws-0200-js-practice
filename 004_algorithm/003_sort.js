@@ -196,17 +196,22 @@ const quickSort = (array) => {
   debugger
   if (array.length <= 1) return array
 
-  const mid = Math.floor(array.length / 2)
-  const pivot = array[mid]
+  const pivotIndex = Math.floor(array.length / 2)
+  const pivot = array[pivotIndex]
   const leftArray = [] // 基準値pivotより小さい値のグループ
   const rightArray = [] // 基準値pivotより大きい値のグループ
 
-  // 基準となる要素を除いた配列を作成する
+  // ピボットを選ぶ位置を取り除いた配列を作成する
   for (let i = 0; i < array.length; i++) {
-    if (i !== mid) {
-      array[i] < pivot ? leftArray.push(array[i]) : rightArray.push(array[i])
+    if (i === pivotIndex) continue
+
+    if (array[i] < pivot) {
+      leftArray.push(array[i])
+    } else {
+      rightArray.push(array[i])
     }
   }
+
   // 再帰的に処理を行い、左側ソート結果 + 基準要素 + 右側ソート結果の順に結合
   return [...quickSort(leftArray), pivot, ...quickSort(rightArray)]
 }
